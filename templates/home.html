@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeamananDataDanJaringan</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+
+</head>
+
+<body>
+    <center>
+        <div class="container">
+            <form action="{{ url_for('post')}}" method="POST">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="notification is-danger">
+                    {{messages[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+                <input id="csrf_token" name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+                <div class="row">
+                    <div class="col-6 form-group">
+                        <label>First Name</label>
+                        <input type="text" name="first_name" placeholder="First Name" class="form-control">
+                        {% for error in form.first_name.eror %}
+                        <small class="text-danger">{{ error }} </small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-6 form-group">
+                        <label>last Name</label>
+                        <input type="text" name="last_name" placeholder="Last Name" class="form-control">
+                        {% for error in form.last_name.eror %}
+                        <small class="text-danger">{{ error }} </small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-6 form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" placeholder="email" class="form-control">
+                        {% for error in form.email.eror %}
+                        <small class="text-danger">{{ error }} </small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-12 form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="Password" class="form-control">
+                        {% for error in form.password.eror %}
+                        <small class="text-danger">{{ error }} </small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-12 form-group">
+                        <button class="btn btn-primary">Kirim</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </center>
+
+</body>
+
+</html>
